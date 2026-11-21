@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox Cloud AFK</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #0b1120;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 650px;
+      margin: 40px auto;
+    }
+    .header { margin-bottom: 28px; }
+    .header h1 { color: #60a5fa; }
+    .card {
+      background: #17243a;
+      border: 1px solid #2b3d58;
+      padding: 22px;
+      border-radius: 16px;
+      margin-bottom: 18px;
+    }
+    .status {
+      color: #fbbf24;
+      font-weight: bold;
+    }
+    .timer {
+      font-size: 38px;
+      font-weight: bold;
+      margin: 18px 0;
+    }
+    button {
+      border: 0;
+      border-radius: 9px;
+      padding: 13px 20px;
+      margin: 5px 4px 5px 0;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .start { background: #16a34a; color: white; }
+    .stop { background: #dc2626; color: white; }
+    .info { color: #a8b7cc; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>ROBLOX CLOUD</h1>
+      <p>Personal AFK Dashboard</p>
+    </header>
+
+    <section class="card">
+      <h2>Cloud Device</h2>
+      <p>Status: <span class="status" id="status">Belum terhubung</span></p>
+      <div class="timer" id="timer">00:00:00</div>
+      <p class="info">Durasi sesi simulasi dashboard</p>
+      <button class="start" onclick="start()">START</button>
+      <button class="stop" onclick="stop()">STOP</button>
+    </section>
+
+    <section class="card">
+      <h2>Server Information</h2>
+      <p>Server: <b>Belum tersedia</b></p>
+      <p>Game: <b>Roblox</b></p>
+      <p>Connection: <b>Not Connected</b></p>
+    </section>
+
+    <p class="info">
+      ROBLOX CLOUD AFK — Development Version 1.0
+    </p>
+  </main>
+
+  <script>
+    let started = false;
+    let seconds = 0;
+    let interval;
+
+    function updateTimer() {
+      const h = String(Math.floor(seconds / 3600)).padStart(2, "0");
+      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+      const s = String(seconds % 60).padStart(2, "0");
+      document.getElementById("timer").textContent =
+        `${h}:${m}:${s}`;
+    }
+
+    function start() {
+      if (started) return;
+      started = true;
+      document.getElementById("status").textContent = "Simulasi berjalan";
+      interval = setInterval(() => {
+        seconds++;
+        updateTimer();
+      }, 1000);
+    }
+
+    function stop() {
+      started = false;
+      clearInterval(interval);
+      document.getElementById("status").textContent = "Dihentikan";
+    }
+  </script>
+</body>
+</html>
